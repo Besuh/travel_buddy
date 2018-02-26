@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login/Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'travelBuddy/index.css' %}">
+</head>
+<body>
+    <h1>Welcome!</h1>
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <fieldset>
+        <legend>Register</legend>
+        <form action="/register" method="post">
+            {% csrf_token %}
+            First Name: <input type="text" name="first_name"><br>
+            Last Name: <input type="text" name="last_name"><br>
+            Email: <input type="text" name="email"><br>
+            Password: <input type="password" name="password"><br>
+            Confirm pw: <input type="password" name="confirm"><br>
+            <input type="submit" value="Register">
+        </form>
+    </fieldset>
+    <h1>Login</h1>
+    <fieldset>
+        <legend>Login</legend>
+        <form action="/login" method="post">
+            {% csrf_token %}
+            Email: <input type="text" name="login_email">
+            Password: <input type="password" name="login_password">
+            <input type="submit" value="Login">
+        </form>
+    </fieldset>
+</body>
+</html>
